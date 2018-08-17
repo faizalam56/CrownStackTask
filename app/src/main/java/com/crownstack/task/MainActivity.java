@@ -46,12 +46,21 @@ public class MainActivity extends AppCompatActivity implements SongAdapter.ItemC
         mainBinding.setItemClick(itemClick);
         if(isNetworkAvailable(this)){
             makeApiCall();
-            initializeMediaPlayer();
+
         }else{
             Toast.makeText(this,"network not available",Toast.LENGTH_SHORT).show();
         }
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(mediaPlayer==null){
+            initializeMediaPlayer();
+        }
+    }
+
     private void initializeMediaPlayer(){
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -70,12 +79,14 @@ public class MainActivity extends AppCompatActivity implements SongAdapter.ItemC
         });
     }
     private void togglePlayPause() {
-        if (mediaPlayer.isPlaying()) {
-            mediaPlayer.pause();
-            mainBinding.playerControl.setImageResource(R.drawable.ic_play_circle_filled_black_24dp);
-        } else {
-            mediaPlayer.start();
-            mainBinding.playerControl.setImageResource(R.drawable.ic_pause_circle_filled_black_24dp);
+        if(mediaPlayer!=null) {
+            if (mediaPlayer.isPlaying()) {
+                mediaPlayer.pause();
+                mainBinding.playerControl.setImageResource(R.drawable.ic_play_circle_filled_black_24dp);
+            } else {
+                mediaPlayer.start();
+                mainBinding.playerControl.setImageResource(R.drawable.ic_pause_circle_filled_black_24dp);
+            }
         }
     }
     private void makeApiCall(){
@@ -110,21 +121,24 @@ public class MainActivity extends AppCompatActivity implements SongAdapter.ItemC
     }
 
 
+
     @Override
     public void onPauseClick(Song.SongItem songItem){
-        if(mediaPlayer!=null) {
-            if (mediaPlayer.isPlaying()) {
-                songItem.setPlaying(false);
-                mainBinding.setSongItem(songItem);
-                mediaPlayer.pause();
+        if(songItem!=null) {
+            if (mediaPlayer != null) {
+                if (mediaPlayer.isPlaying()) {
+                    songItem.setPlaying(false);
+                    mainBinding.setSongItem(songItem);
+                    mediaPlayer.pause();
+                } else if ((!mediaPlayer.isPlaying())) {
+                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition());
+                    mediaPlayer.start();
+                    songItem.setPlaying(true);
+                    mainBinding.setSongItem(songItem);
+                }
             }
-
-            else if ((!mediaPlayer.isPlaying())) {
-                mediaPlayer.seekTo(mediaPlayer.getCurrentPosition());
-                mediaPlayer.start();
-                songItem.setPlaying(true);
-                mainBinding.setSongItem(songItem);
-            }
+        }else{
+            Toast.makeText(this,"first select any track",Toast.LENGTH_SHORT).show();
         }
     }
 
