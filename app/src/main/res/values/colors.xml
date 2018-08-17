@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorAppTheme">#fc7c04</color>
+    <color name="colorAppTheme_opc50">#80fc7c04</color>
+    <color name="colorAppTheme_opc30">#48fc7c04</color>
+    <color name="colorTick">#843404</color>
+    <color name="colorTick_opc50">#80843404</color>
+    <color name="colorThemeDark">#C70039</color>
+
+    <color name="orange" tools:ignore="MissingDefaultResource">#FF3909</color>
+    <color name="colorAccentDark" tools:ignore="MissingDefaultResource">#00B482</color>
+    <color name="colorBlack" tools:ignore="MissingDefaultResource">#555555</color>
+    <color name="colorWhite" tools:ignore="MissingDefaultResource">#FFFFFF</color>
+    <color name="colorGrey" tools:ignore="MissingDefaultResource">#707070</color>
+    <color name="colorGreyLight" tools:ignore="MissingDefaultResource">#8A8A8A</color>
+</resources>

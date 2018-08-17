@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data class = "DetailBinding">
+        <import type="android.view.View"/>
+        <variable
+            name="dvm"
+            type="com.crownstack.task.utility.ViewModel"/>
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorAppTheme_opc50"
+        tools:context="com.crownstack.task.DetailsActivity">
+
+        <include layout="@layout/app_toolbar"/>
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dimen_50dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <RelativeLayout
+            android:id="@+id/relative_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="@{dvm.dialogVisibility ? View.VISIBLE : View.GONE}">
+
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:id="@+id/txtProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/progress"
+                android:layout_centerInParent="true"
+                android:text="Wait..."
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#dcb32e"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+
+</layout>
